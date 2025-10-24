@@ -15,35 +15,38 @@ service Review {
 			body: "*"
 		};
 	};
-	rpc UpdateReview (UpdateReviewRequest) returns (UpdateReviewReply);
-	rpc DeleteReview (DeleteReviewRequest) returns (DeleteReviewReply);
-	rpc GetReview (GetReviewRequest) returns (GetReviewReply);
-	rpc ListReview (ListReviewRequest) returns (ListReviewReply);
+	rpc ReplyReview (ReviewReplyRequest) returns (ReviewReplyResponse){
+		option (google.api.http) = {
+			post: "/review-service/v1/reply",
+			body: "*"
+		};
+	};
 }
 
 message CreateReviewRequest {
 	int64 user_id = 1; 
 	int64 order_id = 2; 
-	string content = 3 [(validate.rules).string.min_len = 10];
-	string pic_info = 4 [(validate.rules).string.pattern = "^(http|https)://.+$"]; // 图片
-	string video_info = 5 [(validate.rules).string.pattern = "^(http|https)://.+$"]; // 视频
-	int32 score = 6 [(validate.rules).int32 = {gt: 0, lte: 5}]; // 1-5 星
-	int32 service_score = 7 [(validate.rules).int32 = {gt: 0, lte: 5}];
-	int32 express_score = 8 [(validate.rules).int32 = {gt: 0, lte: 5}];
-	int32 anonymous = 9 [(validate.rules).int32 = {gte: 0, lte: 1}]; // 是否匿名
+	int64 store_id = 3;
+	string content = 4 [(validate.rules).string.min_len = 10];
+	string pic_info = 5 [(validate.rules).string.pattern = "^(http|https)://.+$"]; // 图片
+	string video_info = 6 [(validate.rules).string.pattern = "^(http|https)://.+$"]; // 视频
+	int32 score = 7 [(validate.rules).int32 = {gt: 0, lte: 5}]; // 1-5 星
+	int32 service_score = 8 [(validate.rules).int32 = {gt: 0, lte: 5}];
+	int32 express_score = 9 [(validate.rules).int32 = {gt: 0, lte: 5}];
+	int32 anonymous = 10 [(validate.rules).int32 = {gte: 0, lte: 1}]; // 是否匿名
 }
 message CreateReviewReply {
 	int64 review_id = 1;
 }
 
-message UpdateReviewRequest {}
-message UpdateReviewReply {}
+message ReviewReplyRequest {
+	int64 review_id = 1;
+	int64 store_id = 2;
+	string content = 3 [(validate.rules).string.min_len = 10];
+	string pic_info = 4 [(validate.rules).string.pattern = "^(http|https)://.+$"]; // 图片
+	string video_info = 5 [(validate.rules).string.pattern = "^(http|https)://.+$"]; // 视频
+}
 
-message DeleteReviewRequest {}
-message DeleteReviewReply {}
-
-message GetReviewRequest {}
-message GetReviewReply {}
-
-message ListReviewRequest {}
-message ListReviewReply {}
+message ReviewReplyResponse {
+	int64 reply_id = 1;
+}

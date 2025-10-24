@@ -27,19 +27,25 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_GormBadErr           ErrorReason = 0 // 数据库错误
-	ErrorReason_OrderReviewReviewErr ErrorReason = 1 // 订单重复评论错误
+	ErrorReason_GormBadErr               ErrorReason = 0 // 数据库错误
+	ErrorReason_ReviewRepeatedErr        ErrorReason = 1 // 订单重复评论错误
+	ErrorReason_ReviewHasReplyErr        ErrorReason = 2 // 订单评论已回复错误
+	ErrorReason_ReviewUnauthorizedAccess ErrorReason = 3 // 未授权访问错误
 )
 
 // Enum value maps for ErrorReason.
 var (
 	ErrorReason_name = map[int32]string{
 		0: "GormBadErr",
-		1: "OrderReviewReviewErr",
+		1: "ReviewRepeatedErr",
+		2: "ReviewHasReplyErr",
+		3: "ReviewUnauthorizedAccess",
 	}
 	ErrorReason_value = map[string]int32{
-		"GormBadErr":           0,
-		"OrderReviewReviewErr": 1,
+		"GormBadErr":               0,
+		"ReviewRepeatedErr":        1,
+		"ReviewHasReplyErr":        2,
+		"ReviewUnauthorizedAccess": 3,
 	}
 )
 
@@ -74,11 +80,13 @@ var File_api_review_v1_errors_proto protoreflect.FileDescriptor
 
 const file_api_review_v1_errors_proto_rawDesc = "" +
 	"\n" +
-	"\x1aapi/review/v1/errors.proto\x12\rapi.review.v1\x1a\x13errors/errors.proto*I\n" +
+	"\x1aapi/review/v1/errors.proto\x12\rapi.review.v1\x1a\x13errors/errors.proto*\x87\x01\n" +
 	"\vErrorReason\x12\x14\n" +
 	"\n" +
-	"GormBadErr\x10\x00\x1a\x04\xa8E\xf4\x03\x12\x1e\n" +
-	"\x14OrderReviewReviewErr\x10\x01\x1a\x04\xa8E\xf4\x03\x1a\x04\xa0E\xf4\x03B2\n" +
+	"GormBadErr\x10\x00\x1a\x04\xa8E\xf4\x03\x12\x1b\n" +
+	"\x11ReviewRepeatedErr\x10\x01\x1a\x04\xa8E\xf4\x03\x12\x1b\n" +
+	"\x11ReviewHasReplyErr\x10\x02\x1a\x04\xa8E\xf4\x03\x12\"\n" +
+	"\x18ReviewUnauthorizedAccess\x10\x03\x1a\x04\xa8E\x93\x03\x1a\x04\xa0E\xf4\x03B2\n" +
 	"\rapi.review.v1P\x01Z\x1freview-service/api/review/v1;v1b\x06proto3"
 
 var (

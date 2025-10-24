@@ -15,5 +15,9 @@ enum ErrorReason {
 
   GormBadErr = 0 [(errors.code) = 500]; // 数据库错误
 
-  OrderReviewReviewErr = 1 [(errors.code) = 500]; // 订单重复评论错误
+  ReviewRepeatedErr = 1 [(errors.code) = 500]; // 订单重复评论错误
+
+  ReviewHasReplyErr = 2 [(errors.code) = 500]; // 订单评论已回复错误
+
+  ReviewUnauthorizedAccess = 3 [(errors.code) = 403]; // 未授权访问错误
 }

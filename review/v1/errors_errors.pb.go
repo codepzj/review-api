@@ -26,15 +26,43 @@ func ErrorGormBadErr(format string, args ...interface{}) *errors.Error {
 }
 
 // 订单重复评论错误
-func IsOrderReviewReviewErr(err error) bool {
+func IsReviewRepeatedErr(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_OrderReviewReviewErr.String() && e.Code == 500
+	return e.Reason == ErrorReason_ReviewRepeatedErr.String() && e.Code == 500
 }
 
 // 订单重复评论错误
-func ErrorOrderReviewReviewErr(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_OrderReviewReviewErr.String(), fmt.Sprintf(format, args...))
+func ErrorReviewRepeatedErr(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ReviewRepeatedErr.String(), fmt.Sprintf(format, args...))
+}
+
+// 订单评论已回复错误
+func IsReviewHasReplyErr(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ReviewHasReplyErr.String() && e.Code == 500
+}
+
+// 订单评论已回复错误
+func ErrorReviewHasReplyErr(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ReviewHasReplyErr.String(), fmt.Sprintf(format, args...))
+}
+
+// 未授权访问错误
+func IsReviewUnauthorizedAccess(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ReviewUnauthorizedAccess.String() && e.Code == 403
+}
+
+// 未授权访问错误
+func ErrorReviewUnauthorizedAccess(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_ReviewUnauthorizedAccess.String(), fmt.Sprintf(format, args...))
 }
