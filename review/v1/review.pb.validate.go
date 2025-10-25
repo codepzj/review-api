@@ -224,22 +224,22 @@ var _CreateReviewRequest_PicInfo_Pattern = regexp.MustCompile("^(http|https)://.
 
 var _CreateReviewRequest_VideoInfo_Pattern = regexp.MustCompile("^(http|https)://.+$")
 
-// Validate checks the field values on CreateReviewReply with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *CreateReviewReply) Validate() error {
+// Validate checks the field values on CreateReviewResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateReviewResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on CreateReviewReply with the rules
+// ValidateAll checks the field values on CreateReviewResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// CreateReviewReplyMultiError, or nil if none found.
-func (m *CreateReviewReply) ValidateAll() error {
+// CreateReviewResponseMultiError, or nil if none found.
+func (m *CreateReviewResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *CreateReviewReply) validate(all bool) error {
+func (m *CreateReviewResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -249,19 +249,19 @@ func (m *CreateReviewReply) validate(all bool) error {
 	// no validation rules for ReviewId
 
 	if len(errors) > 0 {
-		return CreateReviewReplyMultiError(errors)
+		return CreateReviewResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// CreateReviewReplyMultiError is an error wrapping multiple validation errors
-// returned by CreateReviewReply.ValidateAll() if the designated constraints
-// aren't met.
-type CreateReviewReplyMultiError []error
+// CreateReviewResponseMultiError is an error wrapping multiple validation
+// errors returned by CreateReviewResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CreateReviewResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m CreateReviewReplyMultiError) Error() string {
+func (m CreateReviewResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -270,11 +270,11 @@ func (m CreateReviewReplyMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m CreateReviewReplyMultiError) AllErrors() []error { return m }
+func (m CreateReviewResponseMultiError) AllErrors() []error { return m }
 
-// CreateReviewReplyValidationError is the validation error returned by
-// CreateReviewReply.Validate if the designated constraints aren't met.
-type CreateReviewReplyValidationError struct {
+// CreateReviewResponseValidationError is the validation error returned by
+// CreateReviewResponse.Validate if the designated constraints aren't met.
+type CreateReviewResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -282,24 +282,24 @@ type CreateReviewReplyValidationError struct {
 }
 
 // Field function returns field value.
-func (e CreateReviewReplyValidationError) Field() string { return e.field }
+func (e CreateReviewResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e CreateReviewReplyValidationError) Reason() string { return e.reason }
+func (e CreateReviewResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e CreateReviewReplyValidationError) Cause() error { return e.cause }
+func (e CreateReviewResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e CreateReviewReplyValidationError) Key() bool { return e.key }
+func (e CreateReviewResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e CreateReviewReplyValidationError) ErrorName() string {
-	return "CreateReviewReplyValidationError"
+func (e CreateReviewResponseValidationError) ErrorName() string {
+	return "CreateReviewResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e CreateReviewReplyValidationError) Error() string {
+func (e CreateReviewResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -311,14 +311,14 @@ func (e CreateReviewReplyValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCreateReviewReply.%s: %s%s",
+		"invalid %sCreateReviewResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = CreateReviewReplyValidationError{}
+var _ error = CreateReviewResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -326,7 +326,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = CreateReviewReplyValidationError{}
+} = CreateReviewResponseValidationError{}
 
 // Validate checks the field values on ReviewReplyRequest with the rules
 // defined in the proto definition for this message. If any rules are

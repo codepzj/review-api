@@ -27,7 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ReviewClient interface {
-	CreateReview(ctx context.Context, in *CreateReviewRequest, opts ...grpc.CallOption) (*CreateReviewReply, error)
+	CreateReview(ctx context.Context, in *CreateReviewRequest, opts ...grpc.CallOption) (*CreateReviewResponse, error)
 	ReplyReview(ctx context.Context, in *ReviewReplyRequest, opts ...grpc.CallOption) (*ReviewReplyResponse, error)
 }
 
@@ -39,9 +39,9 @@ func NewReviewClient(cc grpc.ClientConnInterface) ReviewClient {
 	return &reviewClient{cc}
 }
 
-func (c *reviewClient) CreateReview(ctx context.Context, in *CreateReviewRequest, opts ...grpc.CallOption) (*CreateReviewReply, error) {
+func (c *reviewClient) CreateReview(ctx context.Context, in *CreateReviewRequest, opts ...grpc.CallOption) (*CreateReviewResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateReviewReply)
+	out := new(CreateReviewResponse)
 	err := c.cc.Invoke(ctx, Review_CreateReview_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -63,7 +63,7 @@ func (c *reviewClient) ReplyReview(ctx context.Context, in *ReviewReplyRequest, 
 // All implementations must embed UnimplementedReviewServer
 // for forward compatibility.
 type ReviewServer interface {
-	CreateReview(context.Context, *CreateReviewRequest) (*CreateReviewReply, error)
+	CreateReview(context.Context, *CreateReviewRequest) (*CreateReviewResponse, error)
 	ReplyReview(context.Context, *ReviewReplyRequest) (*ReviewReplyResponse, error)
 	mustEmbedUnimplementedReviewServer()
 }
@@ -75,7 +75,7 @@ type ReviewServer interface {
 // pointer dereference when methods are called.
 type UnimplementedReviewServer struct{}
 
-func (UnimplementedReviewServer) CreateReview(context.Context, *CreateReviewRequest) (*CreateReviewReply, error) {
+func (UnimplementedReviewServer) CreateReview(context.Context, *CreateReviewRequest) (*CreateReviewResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateReview not implemented")
 }
 func (UnimplementedReviewServer) ReplyReview(context.Context, *ReviewReplyRequest) (*ReviewReplyResponse, error) {

@@ -23,7 +23,7 @@ const OperationReviewCreateReview = "/api.review.v1.Review/CreateReview"
 const OperationReviewReplyReview = "/api.review.v1.Review/ReplyReview"
 
 type ReviewHTTPServer interface {
-	CreateReview(context.Context, *CreateReviewRequest) (*CreateReviewReply, error)
+	CreateReview(context.Context, *CreateReviewRequest) (*CreateReviewResponse, error)
 	ReplyReview(context.Context, *ReviewReplyRequest) (*ReviewReplyResponse, error)
 }
 
@@ -50,7 +50,7 @@ func _Review_CreateReview0_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Cont
 		if err != nil {
 			return err
 		}
-		reply := out.(*CreateReviewReply)
+		reply := out.(*CreateReviewResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -78,7 +78,7 @@ func _Review_ReplyReview0_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Conte
 }
 
 type ReviewHTTPClient interface {
-	CreateReview(ctx context.Context, req *CreateReviewRequest, opts ...http.CallOption) (rsp *CreateReviewReply, err error)
+	CreateReview(ctx context.Context, req *CreateReviewRequest, opts ...http.CallOption) (rsp *CreateReviewResponse, err error)
 	ReplyReview(ctx context.Context, req *ReviewReplyRequest, opts ...http.CallOption) (rsp *ReviewReplyResponse, err error)
 }
 
@@ -90,8 +90,8 @@ func NewReviewHTTPClient(client *http.Client) ReviewHTTPClient {
 	return &ReviewHTTPClientImpl{client}
 }
 
-func (c *ReviewHTTPClientImpl) CreateReview(ctx context.Context, in *CreateReviewRequest, opts ...http.CallOption) (*CreateReviewReply, error) {
-	var out CreateReviewReply
+func (c *ReviewHTTPClientImpl) CreateReview(ctx context.Context, in *CreateReviewRequest, opts ...http.CallOption) (*CreateReviewResponse, error) {
+	var out CreateReviewResponse
 	pattern := "/review-service/v1/create"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationReviewCreateReview))
