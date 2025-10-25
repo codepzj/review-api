@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package api.consumer.v1;
+
+option go_package = "review-c/api/consumer/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.consumer.v1";
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
+service Consumer {
+	// 创建评论
+	rpc CreateReview (CreateConsumerRequest) returns (CreateConsumerReply){
+		option(google.api.http) = {
+			post: "/consumer/v1/review",
+			body: "*"
+		};
+	};
+}
+
+message CreateConsumerRequest {
+	int64 user_id = 1; 
+	int64 order_id = 2; 
+	int64 store_id = 3;
+	string content = 4 [(validate.rules).string.min_len = 10];
+	string pic_info = 5 [(validate.rules).string.pattern = "^(http|https)://.+$"]; // 图片
+	string video_info = 6 [(validate.rules).string.pattern = "^(http|https)://.+$"]; // 视频
+	int32 score = 7 [(validate.rules).int32 = {gt: 0, lte: 5}]; // 1-5 星
+	int32 service_score = 8 [(validate.rules).int32 = {gt: 0, lte: 5}];
+	int32 express_score = 9 [(validate.rules).int32 = {gt: 0, lte: 5}];
+	int32 anonymous = 10 [(validate.rules).int32 = {gte: 0, lte: 1}]; // 是否匿名
+}
+message CreateConsumerReply {
+	int64 review_id = 1;
+}
