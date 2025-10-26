@@ -22,6 +22,7 @@ const _ = http.SupportPackageIsVersion1
 const OperationBusinessCreateReply = "/api.business.v1.Business/CreateReply"
 
 type BusinessHTTPServer interface {
+	// CreateReply 创建回复
 	CreateReply(context.Context, *CreateReplyRequest) (*CreateReplyResponse, error)
 }
 
@@ -53,6 +54,7 @@ func _Business_CreateReply0_HTTP_Handler(srv BusinessHTTPServer) func(ctx http.C
 }
 
 type BusinessHTTPClient interface {
+	// CreateReply 创建回复
 	CreateReply(ctx context.Context, req *CreateReplyRequest, opts ...http.CallOption) (rsp *CreateReplyResponse, err error)
 }
 
@@ -64,6 +66,7 @@ func NewBusinessHTTPClient(client *http.Client) BusinessHTTPClient {
 	return &BusinessHTTPClientImpl{client}
 }
 
+// CreateReply 创建回复
 func (c *BusinessHTTPClientImpl) CreateReply(ctx context.Context, in *CreateReplyRequest, opts ...http.CallOption) (*CreateReplyResponse, error) {
 	var out CreateReplyResponse
 	pattern := "/business/v1/reply"

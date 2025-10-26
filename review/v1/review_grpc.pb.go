@@ -21,14 +21,19 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	Review_CreateReview_FullMethodName = "/api.review.v1.Review/CreateReview"
 	Review_ReplyReview_FullMethodName  = "/api.review.v1.Review/ReplyReview"
+	Review_CreateAppeal_FullMethodName = "/api.review.v1.Review/CreateAppeal"
 )
 
 // ReviewClient is the client API for Review service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ReviewClient interface {
+	// 顾客创建评论
 	CreateReview(ctx context.Context, in *CreateReviewRequest, opts ...grpc.CallOption) (*CreateReviewResponse, error)
+	// 商家评论回复
 	ReplyReview(ctx context.Context, in *ReviewReplyRequest, opts ...grpc.CallOption) (*ReviewReplyResponse, error)
+	// 创建申诉
+	CreateAppeal(ctx context.Context, in *CreateAppealRequest, opts ...grpc.CallOption) (*CreateAppealResponse, error)
 }
 
 type reviewClient struct {
@@ -59,12 +64,26 @@ func (c *reviewClient) ReplyReview(ctx context.Context, in *ReviewReplyRequest, 
 	return out, nil
 }
 
+func (c *reviewClient) CreateAppeal(ctx context.Context, in *CreateAppealRequest, opts ...grpc.CallOption) (*CreateAppealResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateAppealResponse)
+	err := c.cc.Invoke(ctx, Review_CreateAppeal_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ReviewServer is the server API for Review service.
 // All implementations must embed UnimplementedReviewServer
 // for forward compatibility.
 type ReviewServer interface {
+	// 顾客创建评论
 	CreateReview(context.Context, *CreateReviewRequest) (*CreateReviewResponse, error)
+	// 商家评论回复
 	ReplyReview(context.Context, *ReviewReplyRequest) (*ReviewReplyResponse, error)
+	// 创建申诉
+	CreateAppeal(context.Context, *CreateAppealRequest) (*CreateAppealResponse, error)
 	mustEmbedUnimplementedReviewServer()
 }
 
@@ -80,6 +99,9 @@ func (UnimplementedReviewServer) CreateReview(context.Context, *CreateReviewRequ
 }
 func (UnimplementedReviewServer) ReplyReview(context.Context, *ReviewReplyRequest) (*ReviewReplyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReplyReview not implemented")
+}
+func (UnimplementedReviewServer) CreateAppeal(context.Context, *CreateAppealRequest) (*CreateAppealResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAppeal not implemented")
 }
 func (UnimplementedReviewServer) mustEmbedUnimplementedReviewServer() {}
 func (UnimplementedReviewServer) testEmbeddedByValue()                {}
@@ -138,6 +160,24 @@ func _Review_ReplyReview_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Review_CreateAppeal_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAppealRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReviewServer).CreateAppeal(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Review_CreateAppeal_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReviewServer).CreateAppeal(ctx, req.(*CreateAppealRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Review_ServiceDesc is the grpc.ServiceDesc for Review service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -152,6 +192,10 @@ var Review_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReplyReview",
 			Handler:    _Review_ReplyReview_Handler,
+		},
+		{
+			MethodName: "CreateAppeal",
+			Handler:    _Review_CreateAppeal_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

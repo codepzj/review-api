@@ -19,11 +19,16 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationReviewCreateAppeal = "/api.review.v1.Review/CreateAppeal"
 const OperationReviewCreateReview = "/api.review.v1.Review/CreateReview"
 const OperationReviewReplyReview = "/api.review.v1.Review/ReplyReview"
 
 type ReviewHTTPServer interface {
+	// CreateAppeal 创建申诉
+	CreateAppeal(context.Context, *CreateAppealRequest) (*CreateAppealResponse, error)
+	// CreateReview 顾客创建评论
 	CreateReview(context.Context, *CreateReviewRequest) (*CreateReviewResponse, error)
+	// ReplyReview 商家评论回复
 	ReplyReview(context.Context, *ReviewReplyRequest) (*ReviewReplyResponse, error)
 }
 
@@ -31,6 +36,7 @@ func RegisterReviewHTTPServer(s *http.Server, srv ReviewHTTPServer) {
 	r := s.Route("/")
 	r.POST("/review-service/v1/create", _Review_CreateReview0_HTTP_Handler(srv))
 	r.POST("/review-service/v1/reply", _Review_ReplyReview0_HTTP_Handler(srv))
+	r.POST("/review-service/v1/appeal", _Review_CreateAppeal0_HTTP_Handler(srv))
 }
 
 func _Review_CreateReview0_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
@@ -77,8 +83,34 @@ func _Review_ReplyReview0_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Conte
 	}
 }
 
+func _Review_CreateAppeal0_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateAppealRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationReviewCreateAppeal)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateAppeal(ctx, req.(*CreateAppealRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CreateAppealResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type ReviewHTTPClient interface {
+	// CreateAppeal 创建申诉
+	CreateAppeal(ctx context.Context, req *CreateAppealRequest, opts ...http.CallOption) (rsp *CreateAppealResponse, err error)
+	// CreateReview 顾客创建评论
 	CreateReview(ctx context.Context, req *CreateReviewRequest, opts ...http.CallOption) (rsp *CreateReviewResponse, err error)
+	// ReplyReview 商家评论回复
 	ReplyReview(ctx context.Context, req *ReviewReplyRequest, opts ...http.CallOption) (rsp *ReviewReplyResponse, err error)
 }
 
@@ -90,6 +122,21 @@ func NewReviewHTTPClient(client *http.Client) ReviewHTTPClient {
 	return &ReviewHTTPClientImpl{client}
 }
 
+// CreateAppeal 创建申诉
+func (c *ReviewHTTPClientImpl) CreateAppeal(ctx context.Context, in *CreateAppealRequest, opts ...http.CallOption) (*CreateAppealResponse, error) {
+	var out CreateAppealResponse
+	pattern := "/review-service/v1/appeal"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationReviewCreateAppeal))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// CreateReview 顾客创建评论
 func (c *ReviewHTTPClientImpl) CreateReview(ctx context.Context, in *CreateReviewRequest, opts ...http.CallOption) (*CreateReviewResponse, error) {
 	var out CreateReviewResponse
 	pattern := "/review-service/v1/create"
@@ -103,6 +150,7 @@ func (c *ReviewHTTPClientImpl) CreateReview(ctx context.Context, in *CreateRevie
 	return &out, nil
 }
 
+// ReplyReview 商家评论回复
 func (c *ReviewHTTPClientImpl) ReplyReview(ctx context.Context, in *ReviewReplyRequest, opts ...http.CallOption) (*ReviewReplyResponse, error) {
 	var out ReviewReplyResponse
 	pattern := "/review-service/v1/reply"

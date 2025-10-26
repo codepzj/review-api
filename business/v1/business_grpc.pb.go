@@ -26,6 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BusinessClient interface {
+	// 创建回复
 	CreateReply(ctx context.Context, in *CreateReplyRequest, opts ...grpc.CallOption) (*CreateReplyResponse, error)
 }
 
@@ -51,6 +52,7 @@ func (c *businessClient) CreateReply(ctx context.Context, in *CreateReplyRequest
 // All implementations must embed UnimplementedBusinessServer
 // for forward compatibility.
 type BusinessServer interface {
+	// 创建回复
 	CreateReply(context.Context, *CreateReplyRequest) (*CreateReplyResponse, error)
 	mustEmbedUnimplementedBusinessServer()
 }

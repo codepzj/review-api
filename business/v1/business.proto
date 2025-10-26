@@ -8,6 +8,7 @@ option java_package = "api.business.v1";
 import "google/api/annotations.proto";
 	
 service Business {
+	// 创建回复
 	rpc CreateReply (CreateReplyRequest) returns (CreateReplyResponse){
 		option (google.api.http) = {
 			post: "/business/v1/reply",
