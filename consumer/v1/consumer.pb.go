@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        v5.27.1
-// source: consumer/v1/consumer.proto
+// source: api/consumer/v1/consumer.proto
 
 package v1
 
@@ -41,7 +41,7 @@ type CreateConsumerRequest struct {
 
 func (x *CreateConsumerRequest) Reset() {
 	*x = CreateConsumerRequest{}
-	mi := &file_consumer_v1_consumer_proto_msgTypes[0]
+	mi := &file_api_consumer_v1_consumer_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -53,7 +53,7 @@ func (x *CreateConsumerRequest) String() string {
 func (*CreateConsumerRequest) ProtoMessage() {}
 
 func (x *CreateConsumerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_consumer_v1_consumer_proto_msgTypes[0]
+	mi := &file_api_consumer_v1_consumer_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66,7 +66,7 @@ func (x *CreateConsumerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateConsumerRequest.ProtoReflect.Descriptor instead.
 func (*CreateConsumerRequest) Descriptor() ([]byte, []int) {
-	return file_consumer_v1_consumer_proto_rawDescGZIP(), []int{0}
+	return file_api_consumer_v1_consumer_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *CreateConsumerRequest) GetUserId() int64 {
@@ -148,7 +148,7 @@ type CreateConsumerReply struct {
 
 func (x *CreateConsumerReply) Reset() {
 	*x = CreateConsumerReply{}
-	mi := &file_consumer_v1_consumer_proto_msgTypes[1]
+	mi := &file_api_consumer_v1_consumer_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -160,7 +160,7 @@ func (x *CreateConsumerReply) String() string {
 func (*CreateConsumerReply) ProtoMessage() {}
 
 func (x *CreateConsumerReply) ProtoReflect() protoreflect.Message {
-	mi := &file_consumer_v1_consumer_proto_msgTypes[1]
+	mi := &file_api_consumer_v1_consumer_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -173,7 +173,7 @@ func (x *CreateConsumerReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateConsumerReply.ProtoReflect.Descriptor instead.
 func (*CreateConsumerReply) Descriptor() ([]byte, []int) {
-	return file_consumer_v1_consumer_proto_rawDescGZIP(), []int{1}
+	return file_api_consumer_v1_consumer_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *CreateConsumerReply) GetReviewId() int64 {
@@ -183,11 +183,11 @@ func (x *CreateConsumerReply) GetReviewId() int64 {
 	return 0
 }
 
-var File_consumer_v1_consumer_proto protoreflect.FileDescriptor
+var File_api_consumer_v1_consumer_proto protoreflect.FileDescriptor
 
-const file_consumer_v1_consumer_proto_rawDesc = "" +
+const file_api_consumer_v1_consumer_proto_rawDesc = "" +
 	"\n" +
-	"\x1aconsumer/v1/consumer.proto\x12\x0fapi.consumer.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x17validate/validate.proto\"\xa5\x03\n" +
+	"\x1eapi/consumer/v1/consumer.proto\x12\x0fapi.consumer.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x17validate/validate.proto\"\xa5\x03\n" +
 	"\x15CreateConsumerRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x19\n" +
 	"\border_id\x18\x02 \x01(\x03R\aorderId\x12\x19\n" +
@@ -209,23 +209,23 @@ const file_consumer_v1_consumer_proto_rawDesc = "" +
 	"\x0fapi.consumer.v1P\x01Z\x1breview-c/api/consumer/v1;v1b\x06proto3"
 
 var (
-	file_consumer_v1_consumer_proto_rawDescOnce sync.Once
-	file_consumer_v1_consumer_proto_rawDescData []byte
+	file_api_consumer_v1_consumer_proto_rawDescOnce sync.Once
+	file_api_consumer_v1_consumer_proto_rawDescData []byte
 )
 
-func file_consumer_v1_consumer_proto_rawDescGZIP() []byte {
-	file_consumer_v1_consumer_proto_rawDescOnce.Do(func() {
-		file_consumer_v1_consumer_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_consumer_v1_consumer_proto_rawDesc), len(file_consumer_v1_consumer_proto_rawDesc)))
+func file_api_consumer_v1_consumer_proto_rawDescGZIP() []byte {
+	file_api_consumer_v1_consumer_proto_rawDescOnce.Do(func() {
+		file_api_consumer_v1_consumer_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_api_consumer_v1_consumer_proto_rawDesc), len(file_api_consumer_v1_consumer_proto_rawDesc)))
 	})
-	return file_consumer_v1_consumer_proto_rawDescData
+	return file_api_consumer_v1_consumer_proto_rawDescData
 }
 
-var file_consumer_v1_consumer_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_consumer_v1_consumer_proto_goTypes = []any{
+var file_api_consumer_v1_consumer_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_api_consumer_v1_consumer_proto_goTypes = []any{
 	(*CreateConsumerRequest)(nil), // 0: api.consumer.v1.CreateConsumerRequest
 	(*CreateConsumerReply)(nil),   // 1: api.consumer.v1.CreateConsumerReply
 }
-var file_consumer_v1_consumer_proto_depIdxs = []int32{
+var file_api_consumer_v1_consumer_proto_depIdxs = []int32{
 	0, // 0: api.consumer.v1.Consumer.CreateReview:input_type -> api.consumer.v1.CreateConsumerRequest
 	1, // 1: api.consumer.v1.Consumer.CreateReview:output_type -> api.consumer.v1.CreateConsumerReply
 	1, // [1:2] is the sub-list for method output_type
@@ -235,26 +235,26 @@ var file_consumer_v1_consumer_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_consumer_v1_consumer_proto_init() }
-func file_consumer_v1_consumer_proto_init() {
-	if File_consumer_v1_consumer_proto != nil {
+func init() { file_api_consumer_v1_consumer_proto_init() }
+func file_api_consumer_v1_consumer_proto_init() {
+	if File_api_consumer_v1_consumer_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_consumer_v1_consumer_proto_rawDesc), len(file_consumer_v1_consumer_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_consumer_v1_consumer_proto_rawDesc), len(file_api_consumer_v1_consumer_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_consumer_v1_consumer_proto_goTypes,
-		DependencyIndexes: file_consumer_v1_consumer_proto_depIdxs,
-		MessageInfos:      file_consumer_v1_consumer_proto_msgTypes,
+		GoTypes:           file_api_consumer_v1_consumer_proto_goTypes,
+		DependencyIndexes: file_api_consumer_v1_consumer_proto_depIdxs,
+		MessageInfos:      file_api_consumer_v1_consumer_proto_msgTypes,
 	}.Build()
-	File_consumer_v1_consumer_proto = out.File
-	file_consumer_v1_consumer_proto_goTypes = nil
-	file_consumer_v1_consumer_proto_depIdxs = nil
+	File_api_consumer_v1_consumer_proto = out.File
+	file_api_consumer_v1_consumer_proto_goTypes = nil
+	file_api_consumer_v1_consumer_proto_depIdxs = nil
 }

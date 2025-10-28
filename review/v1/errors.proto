@@ -20,4 +20,6 @@ enum ErrorReason {
   ReviewHasReplyErr = 2 [(errors.code) = 500]; // 订单评论已回复错误
 
   ReviewUnauthorizedAccess = 3 [(errors.code) = 403]; // 未授权访问错误
+
+  ReviewAppealedErr = 4 [(errors.code) = 500]; // 评论已申诉，不能重复申诉
 }

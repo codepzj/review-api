@@ -66,3 +66,17 @@ func IsReviewUnauthorizedAccess(err error) bool {
 func ErrorReviewUnauthorizedAccess(format string, args ...interface{}) *errors.Error {
 	return errors.New(403, ErrorReason_ReviewUnauthorizedAccess.String(), fmt.Sprintf(format, args...))
 }
+
+// 评论已申诉，不能重复申诉
+func IsReviewAppealedErr(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ReviewAppealedErr.String() && e.Code == 500
+}
+
+// 评论已申诉，不能重复申诉
+func ErrorReviewAppealedErr(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ReviewAppealedErr.String(), fmt.Sprintf(format, args...))
+}

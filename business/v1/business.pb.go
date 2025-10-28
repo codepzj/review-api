@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        v5.27.1
-// source: business/v1/business.proto
+// source: api/business/v1/business.proto
 
 package v1
 
@@ -35,7 +35,7 @@ type CreateReplyRequest struct {
 
 func (x *CreateReplyRequest) Reset() {
 	*x = CreateReplyRequest{}
-	mi := &file_business_v1_business_proto_msgTypes[0]
+	mi := &file_api_business_v1_business_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47,7 +47,7 @@ func (x *CreateReplyRequest) String() string {
 func (*CreateReplyRequest) ProtoMessage() {}
 
 func (x *CreateReplyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_business_v1_business_proto_msgTypes[0]
+	mi := &file_api_business_v1_business_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60,7 +60,7 @@ func (x *CreateReplyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateReplyRequest.ProtoReflect.Descriptor instead.
 func (*CreateReplyRequest) Descriptor() ([]byte, []int) {
-	return file_business_v1_business_proto_rawDescGZIP(), []int{0}
+	return file_api_business_v1_business_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *CreateReplyRequest) GetReviewId() int64 {
@@ -107,7 +107,7 @@ type CreateReplyResponse struct {
 
 func (x *CreateReplyResponse) Reset() {
 	*x = CreateReplyResponse{}
-	mi := &file_business_v1_business_proto_msgTypes[1]
+	mi := &file_api_business_v1_business_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -119,7 +119,7 @@ func (x *CreateReplyResponse) String() string {
 func (*CreateReplyResponse) ProtoMessage() {}
 
 func (x *CreateReplyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_business_v1_business_proto_msgTypes[1]
+	mi := &file_api_business_v1_business_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -132,7 +132,7 @@ func (x *CreateReplyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateReplyResponse.ProtoReflect.Descriptor instead.
 func (*CreateReplyResponse) Descriptor() ([]byte, []int) {
-	return file_business_v1_business_proto_rawDescGZIP(), []int{1}
+	return file_api_business_v1_business_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *CreateReplyResponse) GetReplyId() int64 {
@@ -142,11 +142,11 @@ func (x *CreateReplyResponse) GetReplyId() int64 {
 	return 0
 }
 
-var File_business_v1_business_proto protoreflect.FileDescriptor
+var File_api_business_v1_business_proto protoreflect.FileDescriptor
 
-const file_business_v1_business_proto_rawDesc = "" +
+const file_api_business_v1_business_proto_rawDesc = "" +
 	"\n" +
-	"\x1abusiness/v1/business.proto\x12\x0fapi.business.v1\x1a\x1cgoogle/api/annotations.proto\"\xa0\x01\n" +
+	"\x1eapi/business/v1/business.proto\x12\x0fapi.business.v1\x1a\x1cgoogle/api/annotations.proto\"\xa0\x01\n" +
 	"\x12CreateReplyRequest\x12\x1b\n" +
 	"\treview_id\x18\x01 \x01(\x03R\breviewId\x12\x19\n" +
 	"\bstore_id\x18\x02 \x01(\x03R\astoreId\x12\x18\n" +
@@ -161,23 +161,23 @@ const file_business_v1_business_proto_rawDesc = "" +
 	"\x0fapi.business.v1P\x01Z\x1breview-c/api/business/v1;v1b\x06proto3"
 
 var (
-	file_business_v1_business_proto_rawDescOnce sync.Once
-	file_business_v1_business_proto_rawDescData []byte
+	file_api_business_v1_business_proto_rawDescOnce sync.Once
+	file_api_business_v1_business_proto_rawDescData []byte
 )
 
-func file_business_v1_business_proto_rawDescGZIP() []byte {
-	file_business_v1_business_proto_rawDescOnce.Do(func() {
-		file_business_v1_business_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_business_v1_business_proto_rawDesc), len(file_business_v1_business_proto_rawDesc)))
+func file_api_business_v1_business_proto_rawDescGZIP() []byte {
+	file_api_business_v1_business_proto_rawDescOnce.Do(func() {
+		file_api_business_v1_business_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_api_business_v1_business_proto_rawDesc), len(file_api_business_v1_business_proto_rawDesc)))
 	})
-	return file_business_v1_business_proto_rawDescData
+	return file_api_business_v1_business_proto_rawDescData
 }
 
-var file_business_v1_business_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_business_v1_business_proto_goTypes = []any{
+var file_api_business_v1_business_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_api_business_v1_business_proto_goTypes = []any{
 	(*CreateReplyRequest)(nil),  // 0: api.business.v1.CreateReplyRequest
 	(*CreateReplyResponse)(nil), // 1: api.business.v1.CreateReplyResponse
 }
-var file_business_v1_business_proto_depIdxs = []int32{
+var file_api_business_v1_business_proto_depIdxs = []int32{
 	0, // 0: api.business.v1.Business.CreateReply:input_type -> api.business.v1.CreateReplyRequest
 	1, // 1: api.business.v1.Business.CreateReply:output_type -> api.business.v1.CreateReplyResponse
 	1, // [1:2] is the sub-list for method output_type
@@ -187,26 +187,26 @@ var file_business_v1_business_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_business_v1_business_proto_init() }
-func file_business_v1_business_proto_init() {
-	if File_business_v1_business_proto != nil {
+func init() { file_api_business_v1_business_proto_init() }
+func file_api_business_v1_business_proto_init() {
+	if File_api_business_v1_business_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_business_v1_business_proto_rawDesc), len(file_business_v1_business_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_business_v1_business_proto_rawDesc), len(file_api_business_v1_business_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_business_v1_business_proto_goTypes,
-		DependencyIndexes: file_business_v1_business_proto_depIdxs,
-		MessageInfos:      file_business_v1_business_proto_msgTypes,
+		GoTypes:           file_api_business_v1_business_proto_goTypes,
+		DependencyIndexes: file_api_business_v1_business_proto_depIdxs,
+		MessageInfos:      file_api_business_v1_business_proto_msgTypes,
 	}.Build()
-	File_business_v1_business_proto = out.File
-	file_business_v1_business_proto_goTypes = nil
-	file_business_v1_business_proto_depIdxs = nil
+	File_api_business_v1_business_proto = out.File
+	file_api_business_v1_business_proto_goTypes = nil
+	file_api_business_v1_business_proto_depIdxs = nil
 }

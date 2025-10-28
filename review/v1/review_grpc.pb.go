@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Review_CreateReview_FullMethodName = "/api.review.v1.Review/CreateReview"
-	Review_ReplyReview_FullMethodName  = "/api.review.v1.Review/ReplyReview"
-	Review_CreateAppeal_FullMethodName = "/api.review.v1.Review/CreateAppeal"
+	Review_CreateReview_FullMethodName           = "/api.review.v1.Review/CreateReview"
+	Review_ReplyReview_FullMethodName            = "/api.review.v1.Review/ReplyReview"
+	Review_CreateAppeal_FullMethodName           = "/api.review.v1.Review/CreateAppeal"
+	Review_GetReviewListByStoreID_FullMethodName = "/api.review.v1.Review/GetReviewListByStoreID"
 )
 
 // ReviewClient is the client API for Review service.
@@ -34,6 +35,8 @@ type ReviewClient interface {
 	ReplyReview(ctx context.Context, in *ReviewReplyRequest, opts ...grpc.CallOption) (*ReviewReplyResponse, error)
 	// 创建申诉
 	CreateAppeal(ctx context.Context, in *CreateAppealRequest, opts ...grpc.CallOption) (*CreateAppealResponse, error)
+	// 根据店铺ID获取评论列表
+	GetReviewListByStoreID(ctx context.Context, in *GetReviewListByStoreIDRequest, opts ...grpc.CallOption) (*GetReviewListByStoreIDResponse, error)
 }
 
 type reviewClient struct {
@@ -74,6 +77,16 @@ func (c *reviewClient) CreateAppeal(ctx context.Context, in *CreateAppealRequest
 	return out, nil
 }
 
+func (c *reviewClient) GetReviewListByStoreID(ctx context.Context, in *GetReviewListByStoreIDRequest, opts ...grpc.CallOption) (*GetReviewListByStoreIDResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetReviewListByStoreIDResponse)
+	err := c.cc.Invoke(ctx, Review_GetReviewListByStoreID_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ReviewServer is the server API for Review service.
 // All implementations must embed UnimplementedReviewServer
 // for forward compatibility.
@@ -84,6 +97,8 @@ type ReviewServer interface {
 	ReplyReview(context.Context, *ReviewReplyRequest) (*ReviewReplyResponse, error)
 	// 创建申诉
 	CreateAppeal(context.Context, *CreateAppealRequest) (*CreateAppealResponse, error)
+	// 根据店铺ID获取评论列表
+	GetReviewListByStoreID(context.Context, *GetReviewListByStoreIDRequest) (*GetReviewListByStoreIDResponse, error)
 	mustEmbedUnimplementedReviewServer()
 }
 
@@ -102,6 +117,9 @@ func (UnimplementedReviewServer) ReplyReview(context.Context, *ReviewReplyReques
 }
 func (UnimplementedReviewServer) CreateAppeal(context.Context, *CreateAppealRequest) (*CreateAppealResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAppeal not implemented")
+}
+func (UnimplementedReviewServer) GetReviewListByStoreID(context.Context, *GetReviewListByStoreIDRequest) (*GetReviewListByStoreIDResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetReviewListByStoreID not implemented")
 }
 func (UnimplementedReviewServer) mustEmbedUnimplementedReviewServer() {}
 func (UnimplementedReviewServer) testEmbeddedByValue()                {}
@@ -178,6 +196,24 @@ func _Review_CreateAppeal_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Review_GetReviewListByStoreID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetReviewListByStoreIDRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReviewServer).GetReviewListByStoreID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Review_GetReviewListByStoreID_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReviewServer).GetReviewListByStoreID(ctx, req.(*GetReviewListByStoreIDRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Review_ServiceDesc is the grpc.ServiceDesc for Review service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -196,6 +232,10 @@ var Review_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateAppeal",
 			Handler:    _Review_CreateAppeal_Handler,
+		},
+		{
+			MethodName: "GetReviewListByStoreID",
+			Handler:    _Review_GetReviewListByStoreID_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
